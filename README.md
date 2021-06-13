@@ -1,9 +1,9 @@
 # Tasks_automation
 Directory name changer - changes names with the given structure:
 
-Main_dir
-  Dir
-    Rev_A
+* Main_dir
+**  Dir
+***    Rev_A
   Dir2
     Rev_A
 
