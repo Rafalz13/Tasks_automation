@@ -72,12 +72,13 @@ Program changes directory names inside LVL2 directories, for example (LVL2\LVL3_
         self.new_name = self.t2.text()
         self.path_to_dirs = self.t3.text()
 
-        self.list_dirs = self.get_dir_names(self.path_to_dirs)
-        self.go_through_dirs(self.old_name, self.new_name, self.list_dirs)
+        try:
+            self.list_dirs = self.get_dir_names(self.path_to_dirs)
+            self.go_through_dirs(self.old_name, self.new_name, self.list_dirs)
+            self.show_dialog(ok=1)
 
-
-
-
+        except (FileNotFoundError, OSError):
+            self.show_dialog(ok=0)
 
     def get_dir_names(self, path_to_dirs=""):
         os.chdir(path_to_dirs)
@@ -98,6 +99,13 @@ Program changes directory names inside LVL2 directories, for example (LVL2\LVL3_
             self.change_dirs_name(old_name, new_name)
             os.chdir("..")
 
+    def show_dialog(self, ok):
+        if ok == 1:
+            QMessageBox.information(self, "Informacja", "Zrobione! ")
+            self.window().close()
+        if ok == 0:
+            QMessageBox.information(self, "Informacja", "Coś jest nie tak! ")
+            self.window().close()
 
 def window():
     app = QApplication([])
